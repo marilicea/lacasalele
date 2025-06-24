@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Casa De Lele</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <header>
+    <h2>La Casa De Lele</h2>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="mostrarSeccion('inicio')">INICIO</a></li>
+        <li><a href="#" onclick="mostrarSeccion('vianey')">VIANEY</a></li>
+        <li><a href="#" onclick="mostrarSeccion('antojitos')">ANTOJITOS</a></li>
+        <li><a href="#" onclick="mostrarSeccion('aguas')">AGUAS</a></li>
+        <li><a href="#" onclick="mostrarSeccion('artesanias')">ARTESANIAS</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="inicio" class="seccion">
+    <h2>Bienvenido a La Casa De Lele</h2>
+    <img src="lele.jpg" alt="Muñeca Lele" class="img-lele">
+    <a href="https://maps.app.goo.gl/S8ZEfHF2t3tKkjGT9">
+      <h2>Ubicación de la casa Lele</h2>
+    </a>
+    <div class="contacto">
+      <div class="contacto-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook">
+        <span>La Casa de Lele</span>
+      </div>
+      <div class="contacto-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+        <span>@casadelele</span>
+      </div>
+      <div class="contacto-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+        <span>448-106-6247</span>
+      </div>
+    </div>
+  </section>
+
+    
+
+    <section id="vianey" class="seccion">
+  <h2>Vianey</h2>
+  <p>Visita la página oficial y selecciona los productos que te interesen. Luego, escríbelos aquí para integrarlos a tu compra:</p>
+  <p><a href="https://vianney.com.mx/" target="_blank">Ir a Vianey.com.mx</a></p>
+<h3>DECORACIÓN PARA EL HOGAR</h3>
+ <div class="grid-categorias">
+      <div class="categoria"><img src="BEBE.webp" alt="Bebé"><p>BEBÉ</p></div>
+      <div class="categoria"><img src="EDREDONES.webp" alt="Edredones"><p>EDREDONES</p></div>
+      <div class="categoria"><img src="CORTINAS.webp" alt="Cortinas"><p>CORTINAS</p></div>
+      <div class="categoria"><img src="NINOS.webp" alt="Niños y Chavos"><p>NIÑOS Y CHAVOS</p></div>
+      <div class="categoria"><img src="DECORACION.jpg" alt="Decoración"><p>DECORACIÓN</p></div>
+      <div class="categoria"><img src="COCINA.webp" alt="Cocina"><p>COCINA</p></div>
+      <div class="categoria"><img src="BANO.jpg" alt="Baño"><p>BAÑO</p></div>
+      <div class="categoria"><img src="SALA.webp" alt="Sala"><p>SALA</p></div>
+    </div>
+  <textarea id="vianey-texto" placeholder="Escribe aquí los nombres de los productos seleccionados..." rows="3"></textarea>
+  <button onclick="guardarVianey()">Enviar productos Vianey</button>
+  <p id="vianey-mensaje"></p>
+</section>
+
+  </section>
+
+
+  <section id="antojitos" class="seccion">
+    <h2>Antojitos - Dorilocos</h2>
+    <h2>Precio: $45 MXN</h2>
+    <h3>Elige el tipo de Doritos</h3>
+    <div class="doritos-container">
+      <label><input type="radio" name="doritos" value="Nacho"><img src="verde.png" alt="Doritos Verdes"></label>
+      <label><input type="radio" name="doritos" value="Flaming Hot"><img src="morado.png" alt="Doritos Morados"></label>
+      <label><input type="radio" name="doritos" value="Dinamita"><img src="rojo.png" alt="Doritos Rojos"></label>
+      <label><input type="radio" name="doritos" value="Negros"><img src="negro.png" alt="Doritos Negros"></label>
+    </div>
+
+    <h3>Ingredientes extra:</h3>
+    <div class="doritos-container">
+      <label><input type="checkbox" value="Chamoy"><img src="chamoyyyy.png" alt="Chamoy"></label>
+      <label><input type="checkbox" value="Limón"><img src="limonn.png" alt="Limón"></label>
+      <label><input type="checkbox" value="Cacahuates"><img src="cacahuatess.png" alt="Cacahuates"></label>
+      <label><input type="checkbox" value="Gomitas"><img src="gomitass.png" alt="Gomitas"></label>
+      <label><input type="checkbox" value="Cueritos"><img src="cueritoss.png" alt="Cueritos"></label>
+    </div>
+
+    <button onclick="agregarAntojito()">Agregar Antojito al Carrito</button>
+  </section>
+
+  <section id="aguas" class="seccion">
+    <h2>Aguas</h2>
+    <h3>Refrescantes bebidas para acompañar tu comida</h3>
+    <h3>Precio: $40 MXN</h3>
+    <div class="doritos-container">
+      <label><input type="radio" name="agua" value="Jamaica"><img src="dejamaica.jpg" alt="Jamaica"></label>
+      <label><input type="radio" name="agua" value="Piña"><img src="depina.jpg" alt="Piña"></label>
+      <label><input type="radio" name="agua" value="Limón"><img src="delimon.jpg" alt="Limón"></label>
+      <label><input type="radio" name="agua" value="Orchata"><img src="deorchara.jpg" alt="Orchata"></label>
+    </div>
+    <button onclick="agregarAgua()">Agregar Bebida al Carrito</button>
+  </section>
+
+  <section id="artesanias" class="seccion">
+    <h2>Artesanías</h2>
+    <div class="grid-artesanias">
+      <div class="producto">
+        <img src="valep.jpg" alt="valep">
+        <h3>Muñeca Lele</h3>
+        <p>$250</p>
+        <button onclick="agregarAlCarrito('Muñeca Lele', 250)">Agregar al carrito</button>
+      </div>
+      <div class="producto">
+        <img src="pan.jpg" alt="Poncho">
+        <h3>Poncho</h3>
+        <p>$320</p>
+        <button onclick="agregarAlCarrito('Poncho', 320)">Agregar al carrito</button>
+      </div>
+      <div class="producto">
+        <img src="pulseras.jpg" alt="pulseras">
+        <h3>pulseras</h3>
+        <p>$160</p>
+        <button onclick="agregarAlCarrito('Pulseras', 160)">Agregar al carrito</button>
+      </div>
+      <div class="producto">
+        <img src="rosa.jpg" alt="monedero rosa">
+        <h3>Monedero rosa</h3>
+        <p>$75</p>
+        <button onclick="agregarAlCarrito('monedero rosa', 75)">Agregar al carrito</button>
+      </div>
+      <div class="producto">
+        <img src="monedero.jpg" alt="monedero">
+        <h3>Monedero</h3>
+        <p>$75</p>
+        <button onclick="agregarAlCarrito('monedero', 75)">Agregar al carrito</button>
+      </div>
+      <div class="producto">
+        <img src="cartera.jpg" alt="cartera">
+        <h3>Cartera</h3>
+        <p>$180</p>
+        <button onclick="agregarAlCarrito('Cartera', 180)">Agregar al carrito</button>
+      </div>
+      <div class="producto">
+        <img src="aretes.jpg" alt="aretes">
+        <h3>Aretes</h3>
+        <p>$75</p>
+        <button onclick="agregarAlCarrito('Aretes', 75)">Agregar al carrito</button>
+      </div>
+      <div class="producto">
+        <img src="c.jpg" alt="monedero rosa">
+        <h3>Monedero</h3>
+        <p>$75</p>
+        <button onclick="agregarAlCarrito('monedero', 75)">Agregar al carrito</button>
+      </div>
+  </section>
+
+   <div id="carrito-icono" onclick="mostrarCarrito()">
+    🛒 <span id="cantidad-carrito">0</span>
+  </div>
+
+  <div id="carrito-panel" style="display:none;" class="carrito">
+    <h3>Tu carrito</h3>
+    <ul id="lista-carrito"></ul>
+    <button onclick="cerrarCarrito()">Cerrar</button>
+    <button id="btn-pagar" onclick="abrirPago()" style="margin-top:10px; display:none;">
+      Pagar
+    </button>
+  </div>
+
+<!-- modal pago actualizado -->
+<div id="modal-pago" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar" onclick="cerrarPago()">&times;</span>
+    <h2>Confirmar Compra</h2>
+    <p id="modal-total"></p>
+    <form id="form-pago" onsubmit="procesarPago(event)">
+      <input type="text" id="nombre-cliente" placeholder="Nombre completo" required>
+      <input type="text" id="direccion-cliente" placeholder="Dirección" required>
+      <input type="tel" id="telefono-cliente" placeholder="Teléfono" required>
+      <input type="email" id="email-cliente" placeholder="Email" required>
+      <input type="text" id="tarjeta-cliente" placeholder="Número de tarjeta" required>
+      <button type="submit">Pagar</button>
+    </form>
+    <p id="mensaje-resultado"></p>
+  </div>
+</div>
+
+<!-- para animación de celebración -->
+<canvas id="confetti-canvas" style="position:absolute;top:0;left:0;pointer-events:none;"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>
+
+
+  <script src="login.js"></script>
+</body>
+</html>
