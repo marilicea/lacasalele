@@ -183,6 +183,22 @@
       <input type="text" id="tarjeta-cliente" placeholder="Número de tarjeta" required>
       <button type="submit">Pagar</button>
     </form>
+    <script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycby7jGnsDMUE52DDngprLguRBACs8bNMWjK_JWCP3SxIk1ffteKHws71HrOh5f3yK6HD/exec'; // pega aquí tu URL del paso anterior
+  const form = document.getElementById('formCompra');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    .then(response => alert("Compra registrada con éxito"))
+    .catch(error => alert("Error al registrar compra"));
+  });
+</script>
     <p id="mensaje-resultado"></p>
   </div>
 </div>
