@@ -112,66 +112,95 @@ function cerrarPago() {
   document.getElementById("modal-pago").style.display = "none";
   document.getElementById("mensaje-resultado").innerText = "";
 }
-
-async function procesarPago(event) {
+function procesarPago(event) {
   event.preventDefault();
-  const nombre = document.getElementById("nombre-cliente").value;
-  const email = document.getElementById("email-cliente").value;
-  const total = carrito.reduce((sum, i) => sum + i.precio, 0);
 
-  const datosCompra = { nombre, email, carrito, total };
-
-  try {
-    const res = await fetch("https://tu-backend.com/api/compras", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(datosCompra),
-    });
-
-    if (!res.ok) throw new Error("Fallo en servidor");
-
-    document.getElementById("mensaje-resultado").innerText = "✅ Compra realizada con éxito";
-    vaciarCarrito();
-    setTimeout(() => {
-      cerrarPago();
-      cerrarCarrito();
-    }, 2000);
-  } catch (e) {
-    document.getElementById("mensaje-resultado").innerText =
-      "❌ Hubo un error procesando el pago. Intenta más tarde.";
-    console.error(e);
-  }
-}
-
-async function procesarPago(event) {
-  event.preventDefault();
   const nombre = document.getElementById("nombre-cliente").value;
   const direccion = document.getElementById("direccion-cliente").value;
   const telefono = document.getElementById("telefono-cliente").value;
   const email = document.getElementById("email-cliente").value;
-  const tarjeta = document.getElementById("tarjeta-cliente").value;
-  const carritoData = carrito;
-  const total = carritoData.reduce((s,i)=>s+i.precio,0);
+  const total = carrito.reduce((s, i) => s + i.precio, 0);
 
-  try {
-    const res = await fetch("http://localhost:3000/api/compras", {
-      method: "POST",
-      headers: { "Content-Type":"application/json" },
-      body: JSON.stringify({ nombre, direccion, telefono, email, tarjeta, carrito: carritoData, total })
-    });
-    const json = await res.json();
-    if (json.ok) {
-      document.getElementById("mensaje-resultado").innerText = json.mensaje;
-      party.confetti(document.getElementById('carrito-icono'));
-      vaciarCarrito();
-      setTimeout(() => { cerrarPago(); cerrarCarrito(); }, 3000);
-    } else {
-      document.getElementById("mensaje-resultado").innerText = "Error: " + json.mensaje;
-    }
-  } catch (e) {
-    document.getElementById("mensaje-resultado").innerText = "Error de conexión";
-  }
+  const carritoTexto = carrito.map((item, index) => {
+    return `${index + 1}. ${item.nombre} - $${item.precio}`;
+  }).join('\n');
+
+  // Llenar los campos del formulario oculto
+  document.getElementById("form-nombre").value = nombre;
+  document.getElementById("form-direccion").value = direccion;
+  document.getElementById("form-telefono").value = telefono;
+  document.getElementById("form-email").value = email;
+  document.getElementById("form-carrito").value = carritoTexto;
+  document.getElementById("form-total").value = `$${total} MXN`;
+
+  // Enviar el formulario a tu correo
+  document.getElementById("formulario-envio").submit();
+
+  // Mostrar mensaje, limpiar carrito y cerrar modal
+  document.getElementById("mensaje-resultado").innerText = "✅ Compra enviada por correo correctamente.";
+  vaciarCarrito();
+  setTimeout(() => {
+    cerrarPago();
+    cerrarCarrito();
+  }, 3000);
 }
+
+  event.preventDefault();
+
+  const nombre = document.getElementById("nombre-cliente").value;
+  const direccion = document.getElementById("direccion-cliente").value;
+  const telefono = document.getElementById("telefono-cliente").value;
+  const email = document.getElementById("email-cliente").value;
+  const total = carrito.reduce((s, i) => s + i.precio, 0);
+
+  const carritoTexto = carrito.map((item, index) => {
+    return `${index + 1}. ${item.nombre} - $${item.precio}`;
+  }).join('\n');
+
+  // Llenar formulario oculto
+  document.getElementById("form-nombre").value = nombre;
+  document.getElementById("form-direccion").value = direccion;
+  document.getElementById("form-telefono").value = telefono;
+  document.getElementById("form-email").value = email;
+  document.getElementById("form-carrito").value = carritoTexto;
+  document.getElementById("form-total").value = `$${total} MXN`;
+
+  // Enviar formulario
+  document.getElementById("formulario-envio").submit();
+
+  // Mostrar mensaje y vaciar carrito
+  document.getElementById("mensaje-resultado").innerText = "✅ Compra enviada por correo correctamente.";
+  vaciarCarrito();
+  setTimeout(() => {
+    cerrarPago();
+    cerrarCarrito();
+  }, 3000);
+function abrirFormularioPago() {
+  const carritoTexto = carrito.map((item, index) =>
+    `${index + 1}. ${item.nombre} - $${item.precio}`
+  ).join('\n');
+
+  const total = carrito.reduce((s, i) => s + i.precio, 0);
+
+  document.getElementById("form-carrito").value = carritoTexto;
+  document.getElementById("form-total").value = `$${total} MXN`;
+
+  // Mostrar el formulario de pago
+  document.getElementById("formulario-pago").style.display = "block";
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("btn-pagar").addEventListener("click", abrirFormularioPago);
+});
+
+  event.preventDefault();
+
+
+}
+
+
+
+
 
 async function guardarVianey() {
   const seleccionados = Array.from(
@@ -214,32 +243,4 @@ async function guardarVianey() {
   }
 }
 
-async function procesarPago(event) {
-  event.preventDefault();
-  const nombre = document.getElementById("nombre-cliente").value;
-  const direccion = document.getElementById("direccion-cliente").value;
-  const telefono = document.getElementById("telefono-cliente").value;
-  const email = document.getElementById("email-cliente").value;
-  const tarjeta = document.getElementById("tarjeta-cliente").value;
-  const carritoData = carrito;
-  const total = carritoData.reduce((s,i)=>s+i.precio,0);
 
-  try {
-    const res = await fetch("http://localhost:3000/api/compras", {
-      method: "POST",
-      headers: { "Content-Type":"application/json" },
-      body: JSON.stringify({ nombre, direccion, telefono, email, tarjeta, carrito: carritoData, total })
-    });
-    const json = await res.json();
-    if (json.ok) {
-      document.getElementById("mensaje-resultado").innerText = json.mensaje;
-      party.confetti(document.getElementById('carrito-icono'));
-      vaciarCarrito();
-      setTimeout(() => { cerrarPago(); cerrarCarrito(); }, 3000);
-    } else {
-      document.getElementById("mensaje-resultado").innerText = "Error: " + json.mensaje;
-    }
-  } catch (e) {
-    document.getElementById("mensaje-resultado").innerText = "Error de conexión";
-  }
-}

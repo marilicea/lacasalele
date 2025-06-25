@@ -164,9 +164,35 @@
     <h3>Tu carrito</h3>
     <ul id="lista-carrito"></ul>
     <button onclick="cerrarCarrito()">Cerrar</button>
-    <button id="btn-pagar" onclick="abrirPago()" style="margin-top:10px; display:none;">
-      Pagar
-    </button>
+<button id="btn-pagar">Pagar</button>
+ <div id="formulario-pago" style="display: none;">
+  <form action="https://formspree.io/f/xzzgkeql" method="POST">
+    <h2>Finalizar Compra</h2>
+
+    <label>Nombre del Cliente:</label><br>
+    <input type="text" name="Nombre" required><br><br>
+
+    <label>Dirección:</label><br>
+    <input type="text" name="Dirección" required><br><br>
+
+    <label>Teléfono:</label><br>
+    <input type="text" name="Teléfono" required><br><br>
+
+    <label>Email del Cliente:</label><br>
+    <input type="email" name="Email" required><br><br>
+
+    <label>Carrito:</label><br>
+    <textarea name="Carrito" id="campo-carrito" rows="5" readonly></textarea><br><br>
+
+    <label>Total:</label><br>
+    <input type="text" name="Total" id="campo-total" readonly><br><br>
+
+    <button type="submit">Enviar Pedido</button>
+  </form>
+</div>
+
+    
+    
   </div>
 
 <!-- modal pago actualizado -->
@@ -175,30 +201,9 @@
     <span class="cerrar" onclick="cerrarPago()">&times;</span>
     <h2>Confirmar Compra</h2>
     <p id="modal-total"></p>
-    <form id="form-pago" onsubmit="procesarPago(event)">
-      <input type="text" id="nombre-cliente" placeholder="Nombre completo" required>
-      <input type="text" id="direccion-cliente" placeholder="Dirección" required>
-      <input type="tel" id="telefono-cliente" placeholder="Teléfono" required>
-      <input type="email" id="email-cliente" placeholder="Email" required>
-      <input type="text" id="tarjeta-cliente" placeholder="Número de tarjeta" required>
-      <button type="submit">Pagar</button>
-    </form>
-    <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycby7jGnsDMUE52DDngprLguRBACs8bNMWjK_JWCP3SxIk1ffteKHws71HrOh5f3yK6HD/exec'; // pega aquí tu URL del paso anterior
-  const form = document.getElementById('formCompra');
-
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(form).entries());
-
-    fetch(scriptURL, {
-      method: 'POST',
-      body: JSON.stringify(data)
-    })
-    .then(response => alert("Compra registrada con éxito"))
-    .catch(error => alert("Error al registrar compra"));
-  });
-</script>
+    
+ 
+</form>
     <p id="mensaje-resultado"></p>
   </div>
 </div>
@@ -207,7 +212,37 @@
 <canvas id="confetti-canvas" style="position:absolute;top:0;left:0;pointer-events:none;"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>
 
-
   <script src="login.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnPagar = document.getElementById("btn-pagar");
+    if (btnPagar) {
+      btnPagar.addEventListener("click", abrirFormularioPago);
+    }
+  });
+
+  function abrirFormularioPago() {
+    const carritoTexto = carrito.map((item, index) =>
+      `${index + 1}. ${item.nombre} - $${item.precio}`
+    ).join('\n');
+
+    const total = carrito.reduce((s, i) => s + i.precio, 0);
+
+    document.getElementById("campo-carrito").value = carritoTexto;
+    document.getElementById("campo-total").value = `$${total} MXN`;
+
+    // Mostrar formulario
+    const formulario = document.getElementById("formulario-pago");
+    if (formulario) {
+      formulario.style.display = "block";
+      formulario.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+</script>
+
+
 </body>
+
+
 </html>
